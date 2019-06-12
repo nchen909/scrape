@@ -1,0 +1,2 @@
+#Area#Population#GDP聽(nominal)#HDI#Demonym#Countries#Languages#Time zones
+#Americas#964,920,000##0.736#American, New Worlder (see usage)#35#Spanish, English, Portuguese, French, Haitian Creole, Quechua, Guaraní, Aymara, Nahuatl, Dutch and many others#UTC−10:00 to UTC

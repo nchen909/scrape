@@ -1,0 +1,2 @@
+#Country#Area#Population#GDP (nominal)#HDI#Demonym#Countries#Languages#Time zones
+#Americas#42,549,000 km2(16,428,000 sq mi)#964,920,000##0.736#American, New Worlder (see usage)#35#Spanish, English, Portuguese, French, Haitian Creole, Quechua, Guaraní, Aymara, Nahuatl, Dutch and many others#UTC−10:00 to UTC
