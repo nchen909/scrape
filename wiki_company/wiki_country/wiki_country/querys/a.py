@@ -1,0 +1,7 @@
+a=open('fields.txt','w+')
+print(type(a.read()))
+a.write('1')
+a.close()
+a=open('fields.txt','w+')
+a.write('2')
+a.close()
