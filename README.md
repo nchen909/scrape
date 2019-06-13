@@ -101,10 +101,9 @@ Area,Population,GDP (nominal),HDI,Demonym,Countries,Languages,Time zones
 
 
 
-```
-# -*- coding: utf-8 -*-
-```
 
+```python
+# -*- coding: utf-8 -*-
 import scrapy
 import json
 #import time
@@ -116,9 +115,6 @@ class CountrySpider(scrapy.Spider):
         path = 'https://www.worldometers.info/geography/alphabetical-list-of-countries/'
         yield scrapy.Request(url=path ,callback=self.parse)#以parse方式发出request
 #meta={'country_name':query}
-
-
-```python
 def parse(self, response):
     countrys = response.xpath('//td[@style="font-weight: bold; font-size:15px"]/text()').extract()
     input_='{"query":['
@@ -271,7 +267,7 @@ class WikiCountryPipeline(object):
 
 注：实时根据现有的标签排名更改输出 取前40个
 
-![number_rank_of_label](C:\Users\mathskiller\Pictures\my-tuchuang\1560352732272.png)
+![number_rank_of_label](https://github.com/1012598167/my-tuchuang/raw/master/1560352732272.png)
 
 #### settings.py:
 
