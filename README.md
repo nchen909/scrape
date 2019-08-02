@@ -28,11 +28,11 @@
 * 选择一个文件夹，打开poweshell
 
 * ```shell
-  mkdir internship\ spider\ scripy
-  cd internship\ spider\ scripys
-  scripy startproject wiki_country
-  scripy genspider countryspider
-  scripy list#看有没有生成这个spider 结果有countryspider
+  mkdir internship\ spider\ scrapy
+  cd internship\ spider\ scrapys
+  scrapy startproject wiki_country
+  scrapy genspider countryspider
+  scrapy list#看有没有生成这个spider 结果有countryspider
   ```
 
   在result中有wiki.py
