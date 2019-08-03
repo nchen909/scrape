@@ -68,7 +68,7 @@ class GooglespiderSpider(scrapy.Spider):
                     title=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]/text()').extract_first()
                     content = content_list[0].xpath('string(.)').extract_first()  # 把�换成/!!!
                     url = 'https://www.google.com'+field.xpath('..//a//@href').extract_first().replace(' › ', '/')
-                fw.write(query)
+                fw.write(pre_query)
                 try:
                     fw.write('#' + title + '#' + content + '#' + url + '\n')
                 except:
@@ -83,7 +83,7 @@ class GooglespiderSpider(scrapy.Spider):
                 for content_ in content_list:
                     content = content_.xpath('string(..//div[@class="BNeawe deIvCb AP7Wnd"])').extract_first().replace('\n', '')
                     url = 'https://www.google.com' + content_.xpath('.//@href').extract_first()
-                    fw.write(query)
+                    fw.write(pre_query)
                     fw.write('#' + title + '#' + content + '#' + url + '\n')
             else:#在首页的视频里边
                 content_list=field.xpath('..//a[@class="BVG0Nb"]')
@@ -96,7 +96,7 @@ class GooglespiderSpider(scrapy.Spider):
                     for content_ in content_list:
                         content = content_.xpath('string(.)').extract_first().replace('\n', '')
                         url = 'https://www.google.com' + content_.xpath('.//@href').extract_first()
-                        fw.write(query)
+                        fw.write(pre_query)
                         # try:
                         fw.write('#' + title + '#' + content + '#' + url + '\n')
                         # except:
@@ -118,7 +118,7 @@ class GooglespiderSpider(scrapy.Spider):
                                 key=1
                                 content=long_content
                                 url = 'https://www.google.com' + field.xpath('.//@href').extract_first()
-                                fw.write(query)
+                                fw.write(pre_query)
                                 fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n')
                                 title = iter.xpath('string(.)').extract_first()#第一次key=1的title
                         else:
@@ -127,7 +127,7 @@ class GooglespiderSpider(scrapy.Spider):
                             else:
                                 content=iter.xpath('string(.)').extract_first().replace('\n', '')
                                 url = 'https://www.google.com' + iter.xpath('../../../../a//@href').extract_first()
-                                fw.write(query)
+                                fw.write(pre_query)
                                 fw.write('#' + title + '#' + content + '#' + url + '\n')
 
 
@@ -135,10 +135,20 @@ class GooglespiderSpider(scrapy.Spider):
 
         fw.close()
         if page_value==6:
+            print('#############################################################\n')
             #self.crawler.engine.close_spider(self, 'scrape %s in google for 5 page successfully!' % query)
             print('scrape %s in google for 5 page successfully!' % query)
+            print('#############################################################\n')
             return
-        pagenow_value = 'https://www.google.com'+response.xpath('//a[@aria-label="Next page"]//@href').extract_first()
+        next_page=response.xpath('//a[@aria-label="Next page"]//@href').extract_first()
+        if not(next_page):
+            print('#############################################################\n')
+            print('scrape %s in google for %d page successfully!\nthis query has only %d page!\n'%(query,page_value-1,page_value-1))
+            print('#############################################################\n')
+            return
+        else:
+            pagenow_value = 'https://www.google.com'+next_page
+
         yield scrapy.Request(url=pagenow_value, meta={'query': query,'pre_query':pre_query,'id':id,'page':{id:page_value}}, callback=self.parse)
         time.sleep(random.random() * 5)
 
