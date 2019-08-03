@@ -6,6 +6,7 @@ import time
 import random
 import re
 from ..items import WikiGoogleItem
+#from ..getProxy import get_ip_list,get_proxies,getHTMLText
 class GooglespiderSpider(scrapy.Spider):
     name = 'googlespider'
     #allowed_domains =['www.google.com']
@@ -150,5 +151,6 @@ class GooglespiderSpider(scrapy.Spider):
             pagenow_value = 'https://www.google.com'+next_page
 
         yield scrapy.Request(url=pagenow_value, meta={'query': query,'pre_query':pre_query,'id':id,'page':{id:page_value}}, callback=self.parse)
-        time.sleep(random.random() * 5)
+        #time.sleep(random.random() * 5)
+        time.sleep(30)
 

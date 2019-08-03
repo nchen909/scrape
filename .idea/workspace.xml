@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd7091d1-ae1b-4fe5-92d4-fca5b9f371d4" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/querys/input.json" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/querys/input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wiki_google/wiki_google/spiders/googlespider.py" beforeDir="false" afterPath="$PROJECT_DIR$/wiki_google/wiki_google/spiders/googlespider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,13 +38,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="77" />
-          <entry key="py" value="3582" />
+          <entry key="py" value="3643" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="77" />
-          <entry key="Python" value="3582" />
+          <entry key="Python" value="3643" />
         </counts>
       </usages-collector>
     </session>
@@ -59,21 +54,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/spiders/googlespider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="859">
-              <caret line="139" column="52" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
+            <state relative-caret-position="536">
+              <caret line="143" column="32" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
               <folding>
-                <element signature="e#24#37#0" expanded="true" />
-                <marker date="1564836541751" expanded="true" signature="840:849" ph="..." />
+                <element signature="e#95#108#0" expanded="true" />
+                <marker date="1564845253014" expanded="true" signature="900:909" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/results/4_3+4@5&amp;= 6_page1.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -88,15 +74,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/items.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/querys/input.json">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -106,17 +83,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/results/2_republic of china_page1.txt">
+        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-53" />
+            <state relative-caret-position="152">
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py">
+        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-324">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="323">
+              <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -126,15 +105,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="475">
               <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="44" column="27" lean-forward="true" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -168,6 +138,8 @@
         <option value="$PROJECT_DIR$/wiki_google/wiki_google/items.py" />
         <option value="$PROJECT_DIR$/wiki_google/wiki_google/settings.py" />
         <option value="$PROJECT_DIR$/wiki_google/wiki_google/querys/input.json" />
+        <option value="$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py" />
+        <option value="$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py" />
         <option value="$PROJECT_DIR$/wiki_google/wiki_google/spiders/googlespider.py" />
       </list>
     </option>
@@ -179,8 +151,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="535" />
-    <option name="y" value="84" />
+    <option name="x" value="652" />
+    <option name="y" value="75" />
     <option name="width" value="1531" />
     <option name="height" value="1098" />
   </component>
@@ -217,13 +189,6 @@
               <item name="wiki_google" type="462c0819:PsiDirectoryNode" />
               <item name="wiki_google" type="462c0819:PsiDirectoryNode" />
               <item name="querys" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="scrapy-wikipedia-country" type="b2602c69:ProjectViewProjectNode" />
-              <item name="scrapy-wikipedia-country" type="462c0819:PsiDirectoryNode" />
-              <item name="wiki_google" type="462c0819:PsiDirectoryNode" />
-              <item name="wiki_google" type="462c0819:PsiDirectoryNode" />
-              <item name="results" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="scrapy-wikipedia-country" type="b2602c69:ProjectViewProjectNode" />
@@ -278,7 +243,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="535" y="84" width="1531" height="1098" extended-state="0" />
+    <frame x="652" y="75" width="1531" height="1098" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28552005" />
@@ -317,38 +282,10 @@
     <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="44" column="27" lean-forward="true" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -374,13 +311,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/results/1_nba_page1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/getProxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/wiki_google/wiki_google/spiders/googlespider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="139" column="52" selection-start-line="139" selection-start-column="52" selection-end-line="139" selection-end-column="52" />
+        <state relative-caret-position="536">
+          <caret line="143" column="32" selection-start-line="143" selection-start-column="32" selection-end-line="143" selection-end-column="32" />
           <folding>
-            <element signature="e#24#37#0" expanded="true" />
-            <marker date="1564836541751" expanded="true" signature="840:849" ph="..." />
+            <element signature="e#95#108#0" expanded="true" />
+            <marker date="1564845253014" expanded="true" signature="900:909" ph="..." />
           </folding>
         </state>
       </provider>
