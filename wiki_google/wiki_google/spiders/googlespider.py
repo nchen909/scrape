@@ -63,20 +63,21 @@ class GooglespiderSpider(scrapy.Spider):
                     content = content_list[0].xpath('string(.)').extract_first()#把�换成/!!! 不需要换了 浏览器那显示�只不过是本地编码的问题
                     #url = field.xpath('..//div[@class="BNeawe UPmit AP7Wnd"]/text()').extract_first().replace(' › ', '/')#把>换成/!!!
                     url = 'https://www.google.com' + field.xpath('..//a//@href').extract_first().replace(' › ', '/')
-                    print(title,content,url,'\n')
-                    #这里结果中会有些一条内容占多行 故意不去处理他 因为那样的content结构更清晰
+                    #print(title,content,url,'\n')用于调试
+                    #这里结果中会有些一条内容占多行 用str将其拉成一行
+                    #fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n') 如果不要一行 保留原来空格 把str去了就是
                 else:#是标签
                     title=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]/text()').extract_first()
                     content = content_list[0].xpath('string(.)').extract_first()  # 把�换成/!!!
                     url = 'https://www.google.com'+field.xpath('..//a//@href').extract_first().replace(' › ', '/')
                 fw.write(pre_query)
-                try:
-                    fw.write('#' + title + '#' + content + '#' + url + '\n')
-                except:
-                    print('#######title:', title, '\n')
-                    print('#######content:', content, '\n')
-                    print('#######url:', url, '\n')
-                    return
+                # try:
+                fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n')
+                # except:
+                #     print('#######title:', title, '\n')
+                #     print('#######content:', content, '\n')
+                #     print('#######url:', url, '\n')
+                #     return
             elif len(content_list)==0:#比如republic of china里的Top stories
                 title=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract_first()
                 titles=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract()[1:]
@@ -85,7 +86,7 @@ class GooglespiderSpider(scrapy.Spider):
                     content = content_.xpath('string(..//div[@class="BNeawe deIvCb AP7Wnd"])').extract_first().replace('\n', '')
                     url = 'https://www.google.com' + content_.xpath('.//@href').extract_first()
                     fw.write(pre_query)
-                    fw.write('#' + title + '#' + content + '#' + url + '\n')
+                    fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n')
             else:#在首页的视频里边
                 content_list=field.xpath('..//a[@class="BVG0Nb"]')
                 title = field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract_first()
@@ -99,7 +100,7 @@ class GooglespiderSpider(scrapy.Spider):
                         url = 'https://www.google.com' + content_.xpath('.//@href').extract_first()
                         fw.write(pre_query)
                         # try:
-                        fw.write('#' + title + '#' + content + '#' + url + '\n')
+                        fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n')
                         # except:
                         #     print('#######title:',title,'\n')
                         #     print('#######content:', content, '\n')
@@ -129,7 +130,7 @@ class GooglespiderSpider(scrapy.Spider):
                                 content=iter.xpath('string(.)').extract_first().replace('\n', '')
                                 url = 'https://www.google.com' + iter.xpath('../../../../a//@href').extract_first()
                                 fw.write(pre_query)
-                                fw.write('#' + title + '#' + content + '#' + url + '\n')
+                                fw.write('#' + str(title) + '#' + str(content) + '#' + str(url) + '\n')
 
 
         page_value+=1
@@ -138,19 +139,18 @@ class GooglespiderSpider(scrapy.Spider):
         if page_value==6:
             print('#############################################################\n')
             #self.crawler.engine.close_spider(self, 'scrape %s in google for 5 page successfully!' % query)
-            print('scrape %s in google for 5 page successfully!' % query)
+            print('scrape %s in google for 5 page successfully!' % pre_query)
             print('#############################################################\n')
             return
         next_page=response.xpath('//a[@aria-label="Next page"]//@href').extract_first()
         if not(next_page):
             print('#############################################################\n')
-            print('scrape %s in google for %d page successfully!\nthis query has only %d page!\n'%(query,page_value-1,page_value-1))
+            print('scrape %s in google for %d page successfully!\nthis query has only %d page!\n'%(pre_query,page_value-1,page_value-1))
             print('#############################################################\n')
             return
         else:
             pagenow_value = 'https://www.google.com'+next_page
 
         yield scrapy.Request(url=pagenow_value, meta={'query': query,'pre_query':pre_query,'id':id,'page':{id:page_value}}, callback=self.parse)
-        #time.sleep(random.random() * 5)
-        time.sleep(30)
+        time.sleep(random.random() * 5)
 
