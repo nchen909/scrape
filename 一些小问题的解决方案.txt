@@ -1,0 +1,96 @@
+﻿一些小问题的解决方式，，，（虽然有些直接google也能找到 但是解决方案和实际结果会有些出入）
+大家解决问题的能力不同。。可能这些小问题算不上问题，但真实地浪费我蛮多时间。。如果大家多指出一些共性的问题可能遇到了解决起来就会快很多 哪怕都是些小问题
+（另外
+
+XuesongSnow:
+公司还在调试系统  我们发了一个模板给他们  暂时没有反馈
+
+XuesongSnow:
+后面有反馈了再根据要求改模板）
+
+## 服务器与本地结果不同之处
+
+### unicode:
+
+
+问题：处理字符串时报错 比如.replace('\xa0', ' ')
+
+
+错误：UnicodeDecodeError: 'ascii' codec can't decode byte 0xa0 in position 0等 
+
+解决：不要用runspider用框架 或者 将字符串改成如u'\xa0' u' '
+
+ 
+
+### python2:
+
+问题：一些参数不能使用
+
+错误：TypeError: 'encoding' is an invalid keyword argument for this function等
+
+解决：运行时使用如python3 -m scrapy xxxx
+
+ 
+
+### 中文注释报错或者因中文出现的问题：
+
+错误：SyntaxError: Non-ASCII character '\xe6' in file
+
+解决：确保
+
+\# -*- coding: utf-8 -*-
+
+一定放在第一行没用回车空格之类的
+
+
+
+### response在本地结果与服务器不一致
+
+问题：同一个网址 服务器和本地解析的完全不同 服务器的response.body和本地的完全不一致
+
+或者xpath helper结果和实际不同
+
+解决：在本地网址中加上/en之类的确保网站是英文的
+
+（另外如google之类会经常重定向 导致解析的和实际输入网址加载出来的东西完全不一样（即使网址输错了也会让你觉得输对的 比如把?q=输成各种#q \q之类 输错的那个没有response 但浏览器上那个网址的确可以）
+
+解决：肯定是动态网页或者对面一堆服务器 要么根据network来解析 或者带着错误的url去google搜）
+
+
+
+## 爬出小部分字符乱码的解决方式
+
+**小部分可以使用.replace()函数，并且将编码设置为与网站源码相同，比如维基 #coding:utf-8**
+
+**然后对于一些‘GDP (nominal)’（wiki Americas的标签）这中间这个空格会在utf-8下出现各种形式，比如‘ ’（\xa0）,' '(\xc2\xa0),'聽'('\xe8\x81\xbd'),'鑱?'('\xe9\x91\xb1?'),一种在不同软件的utf-8打开会改变utf-8编码甚至切换成斜体的空格，可以初步尝试打开这个输出结果并重新replace一下，再f.close()，也可以试着直接爬下标签（或国家名）之后再爬对应的值，省去中间步骤，即不要自己输键而把键也直接爬下来（标签/国家名）。**
+
+
+
+## 用很长的正则 结果和RegexBuddy等正则工具出来结果不同
+
+试着在正则串前加r''
+
+
+
+## 爬取外网时 shadowsocks 设置 pac 模式出现 TCP connection timed out错误
+
+将 pac 模式改为全局模式
+
+类似软件相同, 使用全局代理就没有问题
+
+基本也就维基这种需要全局模式，其余社交平台不需要。 pac模式相当于智能识别需要在洛杉矶连还是不翻墙连。
+
+
+
+##  scrapy shell xxxx 无反应 出不了>>>
+
+> 在使用Scrapy Shell命令行时,一定要记得用引号将网址包括起来, 否则urls包含的参数 (ie. &character)会不起作用.
+>  Widows系统下,使用双引号代替:
+
+```
+scrapy shell "http://quotes.toscrape.com/page/1/"
+```
+
+## 爬一些网站时注意改自己的DNS！ 另外ping不通说明对面服务器不支持ping
+
+## 对同一网址不同结果或者多网址同一结果的 只要scrapy有response 一切以view(response)的实际为准！

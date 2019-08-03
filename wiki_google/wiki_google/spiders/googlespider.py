@@ -54,7 +54,7 @@ class GooglespiderSpider(scrapy.Spider):
             #所谓的视频标签和正常小块等等的区别 在于标题的class是BNeawe vvjwJb AP7Wnd还是BNeawe deIvCb AP7Wnd
             #或者有左右的滚轮或者没有左右滚轮（如球队啊视频啊之类的）即len(content_list)是否=2
             content_list=field.xpath('..//div[@class="BNeawe s3v9rd AP7Wnd"]')
-            if (len(content_list)==2):#不是视频
+            if (len(content_list)==2):#不是滚轮
                 title = field.xpath('..//div[@class="BNeawe vvjwJb AP7Wnd"]/text()').extract_first()
                 if not(title):
                     title = field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract_first()

@@ -1,3 +1,6 @@
+# 爬谷歌的README：https://github.com/1012598167/scrapy-wikipedia-country/tree/master/wiki_google
+
+
 # scrapy wikipedia country
 
 ## 实验目的
@@ -8,7 +11,7 @@
 
 ## 实验要求
 
-* 1. 网址：<https://en.wikipedia.org/> 
+- 1. 网址：<https://en.wikipedia.org/> 
   2. 描述：根据用户输入国家名称搜索，爬取结果页面中国家信息。
   3. 输入：国家名称。
   4. 输出：国家信息。
@@ -19,15 +22,15 @@
 
 ## 实验过程
 
-* ```shell
+- ```shell
   conda install scrapy
   ```
 
   
 
-* 选择一个文件夹，打开poweshell
+- 选择一个文件夹，打开poweshell
 
-* ```shell
+- ```shell
   mkdir internship\ spider\ scrapy
   cd internship\ spider\ scrapys
   scrapy startproject wiki_country
@@ -37,7 +40,7 @@
 
   在result中有wiki.py
 
-* 之后在wiki_country文件下放querys和results文件存输入和输出
+- 之后在wiki_country文件下放querys和results文件存输入和输出
 
   
 
@@ -71,13 +74,13 @@ Area,Population,GDP (nominal),HDI,Demonym,Countries,Languages,Time zones
 
 同时我用了三种写法写着三个spider：
 
-* 爬国家：单个py文件使用scripy runspider country.py就可直接当成spider crawl
+- 爬国家：单个py文件使用scripy runspider country.py就可直接当成spider crawl
 
-* 爬标签：在startproject产生的spiders下只改label.py（输入输出都在里面做）
+- 爬标签：在startproject产生的spiders下只改label.py（输入输出都在里面做）
 
   scrapy crawl label
 
-* 爬值：修改了item与pipeline，以规范化+实现去重与排列
+- 爬值：修改了item与pipeline，以规范化+实现去重与排列
 
   scrapy crawl countryspider
 
@@ -98,7 +101,6 @@ Area,Population,GDP (nominal),HDI,Demonym,Countries,Languages,Time zones
 #### Talk is cheap, show me the code!!
 
 #### country.py:
-
 
 
 
@@ -127,6 +129,7 @@ def parse(self, response):
     fw.write(input_)
     fw.close()
 ```
+
 注：通过爬去常见国家列表'https://www.worldometers.info/geography/alphabetical-list-of-countries/' 生成国家文件input.json, 注意json存的是字典！
 
 
@@ -343,6 +346,7 @@ class CountrySpider(scrapy.Spider):
                 fw.write(res[field].replace('\n',''))#多行的可能会有\n
         fw.close()
         f.close()
+
 ```
 
 
@@ -391,6 +395,7 @@ class LabelSpider(scrapy.Spider):
             item['label_num_dict']=sorted(self.items.keys())
             print("item['label_num_dict']",item['label_num_dict'])#把标签多的放在前面输出 这是一个列表！
             
+
 ```
 
 #### 旧pipeline.py
@@ -424,6 +429,7 @@ class WikiCountryPipeline(object):
         field_set = self.filename.read()[:-1]
         self.filename.write(field_set)
         self.filename.close()
+
 ```
 
 
