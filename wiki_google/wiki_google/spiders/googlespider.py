@@ -28,7 +28,9 @@ class GooglespiderSpider(scrapy.Spider):
                     new_query+=alpha
             query = new_query.replace(' ','+')
             ###
-            path = 'https://172.217.14.78/search?q=%s&hl=en' % query#因为服务器开出来的是english版本 所以爬english的
+            path = 'https://www.google.com/search?q=%s&hl=en' % query#因为服务器开出来的是english版本 所以爬english的
+            # 若直接用谷歌的任意其中一个IP地址172.217.14.78会报Invalid DNS-ID（如果robot设成true直接报错终止 设成false会报warning ）是因为scrapy官方库没写好罢了
+            # 当初一直坚持用IP 甚至导致本地windows crawl的时候没response是因为要统一windows和云服务器CentOS那边的界面 方便调试
         #把CentOS的DNS手动改成8.8.8.8
             yield scrapy.Request(url=path,meta={'query': query,'pre_query':pre_query,'id':id,'page':{id:1}},callback=self.parse)#  # 下一个要执行的函数为parse
             id+=1
@@ -57,10 +59,11 @@ class GooglespiderSpider(scrapy.Spider):
                     title = field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract_first()
                 #不排除的确是滚轮但是只有两项的情况
                 if(title):#不是视频和标签之类 是正常的一个小块
-                    content = content_list[0].xpath('string(.)').extract_first()#把�换成/!!!
+                    content = content_list[0].xpath('string(.)').extract_first()#把�换成/!!! 不需要换了 浏览器那显示�只不过是本地编码的问题
                     #url = field.xpath('..//div[@class="BNeawe UPmit AP7Wnd"]/text()').extract_first().replace(' › ', '/')#把>换成/!!!
                     url = 'https://www.google.com' + field.xpath('..//a//@href').extract_first().replace(' › ', '/')
                     print(title,content,url,'\n')
+                    #这里结果中会有些一条内容占多行 故意不去处理他 因为那样的content结构更清晰
                 else:#是标签
                     title=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]/text()').extract_first()
                     content = content_list[0].xpath('string(.)').extract_first()  # 把�换成/!!!
@@ -78,7 +81,7 @@ class GooglespiderSpider(scrapy.Spider):
                 titles=field.xpath('..//div[@class="BNeawe deIvCb AP7Wnd"]//text()').extract()[1:]
                 content_list = field.xpath('..//a[@class="tHmfQe"]')
                 for content_ in content_list:
-                    content = content_.xpath('string(..//div[@class="BNeawe deIvCb AP7Wnd"])"').extract_first().replace('\n', '')
+                    content = content_.xpath('string(..//div[@class="BNeawe deIvCb AP7Wnd"])').extract_first().replace('\n', '')
                     url = 'https://www.google.com' + content_.xpath('.//@href').extract_first()
                     fw.write(query)
                     fw.write('#' + title + '#' + content + '#' + url + '\n')
@@ -123,7 +126,7 @@ class GooglespiderSpider(scrapy.Spider):
                                 title = iter.xpath('string(.)').extract_first()
                             else:
                                 content=iter.xpath('string(.)').extract_first().replace('\n', '')
-                                url = 'https://www.google.com' + content_.xpath('../../../../a//@href').extract_first()
+                                url = 'https://www.google.com' + iter.xpath('../../../../a//@href').extract_first()
                                 fw.write(query)
                                 fw.write('#' + title + '#' + content + '#' + url + '\n')
 
