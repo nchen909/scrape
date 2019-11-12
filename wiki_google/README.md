@@ -23,6 +23,12 @@
 
 
 ## 注意事项
+注意所有DEFAULT_REQUEST_HEADERS中，必须不能出现User-Agent，使用scrapy默认的agent！（也就是你可以注释掉DEFAULT_REQUEST_HEADERS但别有User-Agent）因为**我的代码是依赖class名字的，而google搜索会随着header变化改html排版和class名字等等**，唯一改header不变的就是部分搜索内容而已。 另外，本地搜索内容和scrapy搜索内容是不一样的。
+```python
+# DEFAULT_REQUEST_HEADERS = {
+#    "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+# }
+```
 
 由于文件名是wiki_google，可能会造成误解，先声明爬的是google，与wiki无关！文件名取wiki_google只是想和别的文件统一一下，好看。
 
