@@ -1,4 +1,4 @@
-# 爬谷歌的README：https://github.com/1012598167/scrapy-wikipedia-country/tree/master/wiki_google
+# 爬谷歌的README：https://github.com/1012598167/scrape/tree/master/wiki_google
 
 
 # scrapy wikipedia country
