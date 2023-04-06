@@ -1,11 +1,10 @@
-# 爬谷歌的README：https://github.com/1012598167/scrape/tree/master/wiki_google
+[scrape google link](https://github.com/nchen909/scrape/tree/master/wiki_google)
 
-
-# scrapy wikipedia country
+# scrape wikipedia country
 
 ## 实验目的
 
-### 爬虫实习的项目1，利用python的scrapy框架爬取维基百科（英文）说的国家信息。
+### 利用python的scrapy框架爬取维基百科（英文）说的国家信息。
 
 
 
@@ -20,7 +19,7 @@
 
 
 
-## 实验过程
+## 配置
 
 - ```shell
   conda install scrapy
@@ -44,21 +43,13 @@
 
   
 
-## 文件目录
-
-![路径](https://github.com/1012598167/my-tuchuang/raw/master/1560350953127.png)
-
-
-
-第一个子文件是github仓库，第二个是scrapy的文件目录格式。
-
 ## 中间过程
 
 本来只有一个wiki.py就行了，但是因为一些手动输入标签会产生一些乱码：
 
 **小部分可以使用.replace()函数，并且将编码设置为与网站源码相同，比如 #coding:utf-8**
 
-**然后对于一些‘GDP (nominal)’（wiki Americas的标签）这中间这个空格会在utf-8下出现各种形式，比如‘ ’（\xa0）,' '(\xc2\xa0),'聽'('\xe8\x81\xbd'),'鑱?'('\xe9\x91\xb1?'),一种在不同软件的utf-8打开会改变utf-8编码甚至切换成斜体的空格：**
+**对于一些‘GDP (nominal)’（wiki Americas的标签）这中间这个空格会在utf-8下出现各种形式，比如‘ ’（\xa0）,' '(\xc2\xa0),'聽'('\xe8\x81\xbd'),'鑱?'('\xe9\x91\xb1?'),一种在不同软件的utf-8打开会改变utf-8编码甚至切换成斜体的空格：**
 
 
 
@@ -90,17 +81,16 @@ Area,Population,GDP (nominal),HDI,Demonym,Countries,Languages,Time zones
 
 **整个运行可通过bash a.sh来完成**
 
-![a.sh](https://github.com/1012598167/my-tuchuang/raw/master/1560351889955.png)
+```bash
+#! /bin/bash
+scrapy runspider country.py
+scrapy crawl label
+scrapy crawl countryspider
+```
 
 并且爬标签时进行了去重和最常见40个标签排列，并直接写在pipeline内而不进行多余的txt/json文件处理。
 
-## 代码
-
-### 注释写得很全了，细节不多解释。
-
-#### Talk is cheap, show me the code!!
-
-#### country.py:
+## 重要代码
 
 
 
@@ -153,7 +143,7 @@ class WikiCountryItem(scrapy.Item):
     pass
 ```
 
-注：这个item是一个字典！！！
+注：item是一个字典。
 
 ![dict](https://github.com/1012598167/my-tuchuang/raw/master/1560352996453.png)
 
@@ -282,7 +272,7 @@ ITEM_PIPELINES = {
 }
 ```
 
-**一定要取消注释！不然pipeline没用！害了我很久！**
+**一定要取消注释！不然pipeline没用！**
 
 #### wiki.py:
 
@@ -350,90 +340,6 @@ class CountrySpider(scrapy.Spider):
 ```
 
 
-
-## 中间版本
-
-由于刚开始做的时候忘记传github了，所以中间很多写法都没了，亏死了555
-
-这里仅存了一种非常复杂的写法，是我刚开始没有逻辑时的智障写法，可以引以为戒。
-
-```python
-# -*- coding: utf-8 -*-
-import scrapy
-import json
-#import time
-import re
-from ..items import WikiCountryItem
-class LabelSpider(scrapy.Spider):
-    name = 'label'
-    def __init__(self):
-
-        self.items={}
-
-    def start_requests(self):
-        with open(r'wiki_country/querys/input.json', 'r') as f:
-            querys = json.load(f)  # 把国家load进来
-        path = 'http://en.wikipedia.org/wiki/'
-        for query in querys['query']:
-            url = path + '_'.join(query.split(' '))  # 对于比如United States去空格为_
-            print(url)
-            yield scrapy.Request(url=url, callback=self.parse)  # 以parse方式发出request
-
-    def parse(self, response):
-        fields = response.css('.infobox').xpath('.//th[@scope="row"]')  # infobox中获取标签如Area Population
-        #res = {}
-        for field in fields:
-            field=field.replace('\xa0', ' ')
-            item=WikiCountryItem()
-            key = field.xpath('.//text()').extract_first()  # 对应一个个标签比如Area
-            if item not in self.items:
-                self.items[key]=1
-                #以此去重 若在字典里就不再加一遍
-            else:
-                self.items[key]+=1
-            print('self.items:',self.items)
-            item['label_num_dict']=sorted(self.items.keys())
-            print("item['label_num_dict']",item['label_num_dict'])#把标签多的放在前面输出 这是一个列表！
-            
-
-```
-
-#### 旧pipeline.py
-
-```python
-# -*- coding: utf-8 -*-
-
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-
-
-class WikiCountryPipeline(object):
-    def __init__(self):
-        self.filename = open(r'wiki_country/querys/fields.txt','w+', encoding='utf-8')#因为写的列表，所以覆盖写
-    def process_item(self, item, spider):
-        #if item['label']:
-        #    self.filename.write(item['label']+',')
-        #self.filename.close()
-        #f2 = open(r'wiki_country/querys/fields.txt', 'w+', encoding='utf-8')#覆盖写
-        for label_ in item['label_num_dict']:
-            self.filename.write(label_ + ',')
-        #field_set = self.filename.read().split(',')[:-1]#去掉最后一个逗号的空的
-
-        return item
-    def close_spider(self,spider):
-        self.filename.close()
-        #下面 吃掉最后一个逗号
-        self.filename = open(r'wiki_country/querys/fields.txt', 'w+', encoding='utf-8')
-        field_set = self.filename.read()[:-1]
-        self.filename.write(field_set)
-        self.filename.close()
-
-```
-
-
-
 ## 实验效果
 
 #### input.json
@@ -457,18 +363,8 @@ GDP,Capital,Government,Time zone,Currency,Driving side,Calling code,Internet TLD
 *现在的github有两份文件，一份wiki_country，一份wiki_company*
 
 wiki_country是主要文件 wiki_company:
-这份company是基于country改的 只需要花一小时不到就能改成爬wiki的任何东西 但是:
-爬的的确是company但是代码结构 文件地址 变量名称 注释 README都是country
+这份company是基于country改的，只需要花一小时不到就能改成爬wiki的任何东西。
 
 
 
 所以若您对这份代码感兴趣，您可以先试着改成爬wiki的其他网站，再者爬任何静态网页。
-
-## 致谢 
-
-​	真的感谢王佳伟同学，我本来应该是爬公司的，他爬国家，做了五天才发现我做错了。。羞愧不已，王佳伟同学愿意在已经做完的情况下跟我换任务，给我腾出时间取赶其他ddl，感激不尽，好人一生平安！
-
-
-
-
-
